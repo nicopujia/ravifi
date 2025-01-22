@@ -8,9 +8,9 @@ App to log your physical state in a simple yet complete manner.
 
 Tracking progress is important because it helps people achieve their goals, in this case, their fitness goals.
 
-However, tracking personal physical progress is such a mess (weight here, photos there, etc) and it’s hard to view and share the progress with a thorough yet easy-to-do analysis.
+However, tracking physical progress is such a mess (weight here, photos there, etc) and it’s hard to view and share the progress with a thorough yet easy-to-do analysis. Or you could have a well-configured spreadsheet exactly as you want, but is cumbersome for fitness tracking due to its lack of automation, poor mobile experience, limited visualization, and absence of features like reminders and easy photo tracking.
 
-Because it’s only a problem for those who track for themselves (because elite althlete have their team of people tracking them), it’s targeted at casual fitness people; that’s why it avoids measuring muscle sizes, for example, because those users (like me, at least) care about how strong they are and how they look like, not the exact measurement of the muscle.
+To summarize, existing solutions offer a poor experience or are too time-consuming for people who simply care how they've improved overall week after week, and not about every single detail.
 
 ## The solution
 
