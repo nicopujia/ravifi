@@ -36,19 +36,23 @@ class _AddLogViewState extends State<AddLogView> {
                   children: [
                     Expanded(
                       child: TextFormField(
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
-                        decoration:
-                            InputDecoration.collapsed(hintText: 'Weight'),
+                        keyboardType: TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
+                        decoration: InputDecoration.collapsed(
+                          hintText: 'Weight',
+                        ),
                         textInputAction: TextInputAction.next,
                       ),
                     ),
                     Expanded(
                       child: TextFormField(
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
-                        decoration:
-                            InputDecoration.collapsed(hintText: 'Height'),
+                        keyboardType: TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
+                        decoration: InputDecoration.collapsed(
+                          hintText: 'Height',
+                        ),
                       ),
                     ),
                   ],
@@ -62,7 +66,8 @@ class _AddLogViewState extends State<AddLogView> {
                 RichText(
                   text: TextSpan(
                     text:
-                        'You may specify either maximum the amount of reps you made or the maximum weight you lifted last week, but',
+                        'You may specify either maximum the amount of reps you'
+                        ' made or the maximum weight you lifted last week, but',
                     style: Theme.of(context).textTheme.bodySmall,
                     children: [
                       TextSpan(
@@ -77,16 +82,19 @@ class _AddLogViewState extends State<AddLogView> {
                   children: [
                     Expanded(
                         child: TextFormField(
-                      keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
+                      keyboardType: TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
                       decoration: InputDecoration.collapsed(hintText: 'Squat'),
                     )),
                     Expanded(
                         child: TextFormField(
-                      keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
-                      decoration:
-                          InputDecoration.collapsed(hintText: 'Bench press'),
+                      keyboardType: TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
+                      decoration: InputDecoration.collapsed(
+                        hintText: 'Bench press',
+                      ),
                     )),
                   ],
                 ),
@@ -97,15 +105,18 @@ class _AddLogViewState extends State<AddLogView> {
                       keyboardType: TextInputType.numberWithOptions(
                         decimal: true,
                       ),
-                      decoration:
-                          InputDecoration.collapsed(hintText: 'Pull-ups'),
+                      decoration: InputDecoration.collapsed(
+                        hintText: 'Pull-ups',
+                      ),
                     )),
                     Expanded(
                         child: TextFormField(
-                      keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
-                      decoration:
-                          InputDecoration.collapsed(hintText: 'Deadlift'),
+                      keyboardType: TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
+                      decoration: InputDecoration.collapsed(
+                        hintText: 'Deadlift',
+                      ),
                     )),
                   ],
                 ),
@@ -119,17 +130,20 @@ class _AddLogViewState extends State<AddLogView> {
                   children: [
                     Expanded(
                       child: TextFormField(
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
-                        decoration:
-                            InputDecoration.collapsed(hintText: 'Distance'),
+                        keyboardType: TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
+                        decoration: InputDecoration.collapsed(
+                          hintText: 'Distance',
+                        ),
                         textInputAction: TextInputAction.next,
                       ),
                     ),
                     Expanded(
                       child: TextFormField(
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
                         decoration: InputDecoration.collapsed(hintText: 'Time'),
                       ),
                     ),
