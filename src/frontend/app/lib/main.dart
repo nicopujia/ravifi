@@ -14,7 +14,7 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  int currentPageIndex = 0;
+  int _currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class _MainAppState extends State<MainApp> {
         body: [
           HomeView(),
           SettingsView(),
-        ][currentPageIndex],
+        ][_currentPageIndex],
         bottomNavigationBar: NavigationBar(
           destinations: [
             NavigationDestination(
@@ -35,10 +35,10 @@ class _MainAppState extends State<MainApp> {
               label: "Settings",
             ),
           ],
-          selectedIndex: currentPageIndex,
+          selectedIndex: _currentPageIndex,
           onDestinationSelected: (int index) {
             setState(() {
-              currentPageIndex = index;
+              _currentPageIndex = index;
             });
           },
         ),
