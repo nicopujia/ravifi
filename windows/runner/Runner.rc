@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
+            VALUE "CompanyName", "com.nicolaspujia" "\0"
             VALUE "FileDescription", "ravifi" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "ravifi" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 com.nicolaspujia. All rights reserved." "\0"
             VALUE "OriginalFilename", "ravifi.exe" "\0"
             VALUE "ProductName", "ravifi" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
