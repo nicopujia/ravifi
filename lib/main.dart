@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:ravifi/brick/repository.dart';
 import 'package:ravifi/views/home_view.dart';
 import 'package:ravifi/views/settings_view.dart';
+import 'package:sqflite/sqflite.dart' show databaseFactory;
 
-void main() {
+Future<void> main() async {
+  await Repository.configure(databaseFactory);
+  await Repository().initialize();
+  if (!const bool.hasEnvironment('SUPABASE_KEY')) {
+    throw Exception('SUPABASE_KEY not found in environment variables');
+  }
   runApp(const MainApp());
 }
 
