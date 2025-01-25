@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'add_log.controller.dart';
+import 'widgets/decimal_field.dart';
 import 'widgets/field_set.dart';
-import 'widgets/fields.dart';
 
 class AddLogView extends StatelessWidget {
   const AddLogView({super.key});
