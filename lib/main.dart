@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sqflite/sqflite.dart' show databaseFactory;
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'brick/repository.dart';
 import 'features/home/home.view.dart';
 import 'features/settings/settings.view.dart';
 
 Future<void> main() async {
+  sqfliteFfiInit();
   await Repository.configure(databaseFactory);
   await Repository().initialize();
   runApp(const MainApp());
@@ -14,6 +16,15 @@ Future<void> main() async {
 
 class MainController extends GetxController {
   var currentPageIndex = 0.obs;
+
+  @override
+  void onInit() {
+    final session = Supabase.instance.client.auth.currentSession;
+    if (session == null) {
+      Supabase.instance.client.auth.signInAnonymously();
+    }
+    super.onInit();
+  }
 
   void updatePage(int index) => currentPageIndex.value = index;
 }

@@ -42,8 +42,18 @@ class AddLogView extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Expanded(child: DecimalField(hintText: 'Weight')),
-                    Expanded(child: DecimalField(hintText: 'Height')),
+                    Expanded(
+                      child: DecimalField(
+                        hintText: 'Weight',
+                        textEditingController: controller.weightController,
+                      ),
+                    ),
+                    Expanded(
+                      child: DecimalField(
+                        hintText: 'Height',
+                        textEditingController: controller.heightController,
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -55,14 +65,34 @@ class AddLogView extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Expanded(child: DecimalField(hintText: 'Squat')),
-                    Expanded(child: DecimalField(hintText: 'Bench press')),
+                    Expanded(
+                      child: DecimalField(
+                        hintText: 'Squat',
+                        textEditingController: controller.squatController,
+                      ),
+                    ),
+                    Expanded(
+                      child: DecimalField(
+                        hintText: 'Bench press',
+                        textEditingController: controller.benchPressController,
+                      ),
+                    ),
                   ],
                 ),
                 Row(
                   children: [
-                    Expanded(child: DecimalField(hintText: 'Pull-up')),
-                    Expanded(child: DecimalField(hintText: 'Deadlift')),
+                    Expanded(
+                      child: DecimalField(
+                        hintText: 'Pull-up',
+                        textEditingController: controller.pullUpController,
+                      ),
+                    ),
+                    Expanded(
+                      child: DecimalField(
+                        hintText: 'Deadlift',
+                        textEditingController: controller.deadliftController,
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -74,7 +104,12 @@ class AddLogView extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Expanded(child: DecimalField(hintText: 'Distance')),
+                    Expanded(
+                      child: DecimalField(
+                        hintText: 'Distance',
+                        textEditingController: controller.distanceController,
+                      ),
+                    ),
                     Expanded(
                       child: TextFormField(
                         controller: controller.timeRunningController,

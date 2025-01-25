@@ -2,7 +2,7 @@ import 'package:brick_offline_first_with_supabase/brick_offline_first_with_supab
 import 'package:brick_sqlite/brick_sqlite.dart';
 import 'package:brick_sqlite/memory_cache_provider.dart';
 import 'package:brick_supabase/brick_supabase.dart' hide Supabase;
-import 'package:sqflite_common/sqlite_api.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'brick.g.dart';
@@ -41,8 +41,8 @@ class Repository extends OfflineFirstWithSupabaseRepository {
     _instance = Repository._(
       supabaseProvider: provider,
       sqliteProvider: SqliteProvider(
-        'my_repository.sqlite',
-        databaseFactory: databaseFactory,
+        inMemoryDatabasePath,
+        databaseFactory: databaseFactoryFfi,
         modelDictionary: sqliteModelDictionary,
       ),
       migrations: migrations,
