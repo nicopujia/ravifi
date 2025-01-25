@@ -1,4 +1,4 @@
-# RaViFi - Visual Physique Tracker
+# Ravifi
 
 ![Raven](https://img.freepik.com/premium-vector/raven-logo-icon-design-illustration_586739-904.jpg)
 
@@ -26,7 +26,7 @@ To summarize, existing solutions offer a poor experience or are too time-consumi
 >
 >All your data is available on all of your devices. But if you ever decide you don’t want to continue using the app, just export all your data in a zip folder - for free.
 
-### Unique selling points
+### Characteristics
 
 * Simplicity: Minimal input, maximum insight.
 * Centralization: Combines tracking for aesthetics, strength, and cardio in one multi-platform app.
