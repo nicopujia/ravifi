@@ -21,12 +21,19 @@ class AddLogView extends StatelessWidget {
           padding: EdgeInsets.all(16),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           children: [
-            InputDatePickerFormField(
-              firstDate: DateTime.fromMicrosecondsSinceEpoch(0),
-              lastDate: DateTime.now(),
-              initialDate: DateTime.now(),
-              fieldLabelText: 'Date',
-              errorFormatText: 'Invalid date format. It should be mm/dd/yyyy',
+            FieldSet(
+              labelText: 'Date',
+              icon: Icons.calendar_today,
+              children: [
+                TextFormField(
+                  controller: controller.dateController,
+                  readOnly: true,
+                  onTap: controller.showDatePickerDialog,
+                  decoration: InputDecoration.collapsed(
+                    hintText: 'Tap to edit',
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 16),
             FieldSet(
