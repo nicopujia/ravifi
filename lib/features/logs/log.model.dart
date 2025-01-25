@@ -8,14 +8,14 @@ import 'package:uuid/uuid.dart';
 )
 class Log extends OfflineFirstWithSupabaseModel {
   final DateTime date;
-  final double weight;
-  final double height;
-  final double squat;
-  final double pullUp;
-  final double benchPress;
-  final double deadlift;
-  final double distance;
-  final double timeRunning;
+  final double? weight;
+  final double? height;
+  final double? squat;
+  final double? pullUp;
+  final double? benchPress;
+  final double? deadlift;
+  final double? distance;
+  final int? timeRunning;
 
   @Supabase(unique: true)
   @Sqlite(index: true, unique: true)
@@ -24,13 +24,13 @@ class Log extends OfflineFirstWithSupabaseModel {
   Log({
     String? id,
     required this.date,
-    required this.weight,
-    required this.height,
-    required this.squat,
-    required this.pullUp,
-    required this.benchPress,
-    required this.deadlift,
-    required this.distance,
-    required this.timeRunning,
+    this.weight,
+    this.height,
+    this.squat,
+    this.pullUp,
+    this.benchPress,
+    this.deadlift,
+    this.distance,
+    this.timeRunning,
   }) : id = id ?? const Uuid().v4();
 }

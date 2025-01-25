@@ -6,14 +6,16 @@ Future<Log> _$LogFromSupabase(Map<String, dynamic> data,
     OfflineFirstWithSupabaseRepository? repository}) async {
   return Log(
       date: DateTime.parse(data['date'] as String),
-      weight: data['weight'] as double,
-      height: data['height'] as double,
-      squat: data['squat'] as double,
-      pullUp: data['pull_up'] as double,
-      benchPress: data['bench_press'] as double,
-      deadlift: data['deadlift'] as double,
-      distance: data['distance'] as double,
-      timeRunning: data['time_running'] as double,
+      weight: data['weight'] == null ? null : data['weight'] as double?,
+      height: data['height'] == null ? null : data['height'] as double?,
+      squat: data['squat'] == null ? null : data['squat'] as double?,
+      pullUp: data['pull_up'] == null ? null : data['pull_up'] as double?,
+      benchPress:
+          data['bench_press'] == null ? null : data['bench_press'] as double?,
+      deadlift: data['deadlift'] == null ? null : data['deadlift'] as double?,
+      distance: data['distance'] == null ? null : data['distance'] as double?,
+      timeRunning:
+          data['time_running'] == null ? null : data['time_running'] as int?,
       id: data['id'] as String?);
 }
 
@@ -39,14 +41,16 @@ Future<Log> _$LogFromSqlite(Map<String, dynamic> data,
     OfflineFirstWithSupabaseRepository? repository}) async {
   return Log(
       date: DateTime.parse(data['date'] as String),
-      weight: data['weight'] as double,
-      height: data['height'] as double,
-      squat: data['squat'] as double,
-      pullUp: data['pull_up'] as double,
-      benchPress: data['bench_press'] as double,
-      deadlift: data['deadlift'] as double,
-      distance: data['distance'] as double,
-      timeRunning: data['time_running'] as double,
+      weight: data['weight'] == null ? null : data['weight'] as double?,
+      height: data['height'] == null ? null : data['height'] as double?,
+      squat: data['squat'] == null ? null : data['squat'] as double?,
+      pullUp: data['pull_up'] == null ? null : data['pull_up'] as double?,
+      benchPress:
+          data['bench_press'] == null ? null : data['bench_press'] as double?,
+      deadlift: data['deadlift'] == null ? null : data['deadlift'] as double?,
+      distance: data['distance'] == null ? null : data['distance'] as double?,
+      timeRunning:
+          data['time_running'] == null ? null : data['time_running'] as int?,
       id: data['id'] as String)
     ..primaryKey = data['_brick_id'] as int;
 }
@@ -183,7 +187,7 @@ class LogAdapter extends OfflineFirstWithSupabaseAdapter<Log> {
       association: false,
       columnName: 'time_running',
       iterable: false,
-      type: double,
+      type: int,
     ),
     'id': const RuntimeSqliteColumnDefinition(
       association: false,
