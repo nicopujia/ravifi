@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ravifi/views/add_log_view.dart';
+import 'package:ravifi/features/logs/add_log.view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

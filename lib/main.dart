@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ravifi/brick/repository.dart';
-import 'package:ravifi/views/home_view.dart';
-import 'package:ravifi/views/settings_view.dart';
+import 'package:ravifi/features/home/home.view.dart';
+import 'package:ravifi/features/settings/settings.view.dart';
 import 'package:sqflite/sqflite.dart' show databaseFactory;
 
 Future<void> main() async {
