@@ -83,7 +83,16 @@ class AddLogView extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(child: DecimalField(hintText: 'Distance')),
-                    Expanded(child: DecimalField(hintText: 'Time running')),
+                    Expanded(
+                      child: TextFormField(
+                        controller: controller.timeRunningController,
+                        decoration: InputDecoration.collapsed(
+                          hintText: 'Time running',
+                        ),
+                        readOnly: true,
+                        onTap: controller.showTimeRunningPicker,
+                      ),
+                    ),
                   ],
                 ),
               ],
