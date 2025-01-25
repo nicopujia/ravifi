@@ -18,39 +18,15 @@ class AddLogView extends StatelessWidget {
           padding: EdgeInsets.all(16),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           children: [
-            InputDatePickerFormField(
-              firstDate: DateTime.fromMicrosecondsSinceEpoch(0),
-              lastDate: DateTime.now(),
-              initialDate: DateTime.now(),
-              fieldLabelText: 'Date',
-            ),
+            DateField(),
             SizedBox(height: 16),
             FormFieldSet(
               label: Text('BMI'),
               children: [
                 Row(
                   children: [
-                    Expanded(
-                      child: TextFormField(
-                        keyboardType: TextInputType.numberWithOptions(
-                          decimal: true,
-                        ),
-                        decoration: InputDecoration.collapsed(
-                          hintText: 'Weight',
-                        ),
-                        textInputAction: TextInputAction.next,
-                      ),
-                    ),
-                    Expanded(
-                      child: TextFormField(
-                        keyboardType: TextInputType.numberWithOptions(
-                          decimal: true,
-                        ),
-                        decoration: InputDecoration.collapsed(
-                          hintText: 'Height',
-                        ),
-                      ),
-                    ),
+                    Expanded(child: WeightField()),
+                    Expanded(child: HeightField()),
                   ],
                 ),
               ],
@@ -59,61 +35,17 @@ class AddLogView extends StatelessWidget {
             FormFieldSet(
               label: Text('Strength'),
               children: [
-                RichText(
-                  text: TextSpan(
-                    text:
-                        'You may specify either maximum the amount of reps you'
-                        ' made or the maximum weight you lifted last week, but',
-                    style: Theme.of(context).textTheme.bodySmall,
-                    children: [
-                      TextSpan(
-                        text: ' be consistent among all the logs',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      TextSpan(text: ' for each field.'),
-                    ],
-                  ),
-                ),
+                StrengthFieldSetHint(),
                 Row(
                   children: [
-                    Expanded(
-                        child: TextFormField(
-                      keyboardType: TextInputType.numberWithOptions(
-                        decimal: true,
-                      ),
-                      decoration: InputDecoration.collapsed(hintText: 'Squat'),
-                    )),
-                    Expanded(
-                        child: TextFormField(
-                      keyboardType: TextInputType.numberWithOptions(
-                        decimal: true,
-                      ),
-                      decoration: InputDecoration.collapsed(
-                        hintText: 'Bench press',
-                      ),
-                    )),
+                    Expanded(child: SquatField()),
+                    Expanded(child: BenchPressField()),
                   ],
                 ),
                 Row(
                   children: [
-                    Expanded(
-                        child: TextFormField(
-                      keyboardType: TextInputType.numberWithOptions(
-                        decimal: true,
-                      ),
-                      decoration: InputDecoration.collapsed(
-                        hintText: 'Pull-ups',
-                      ),
-                    )),
-                    Expanded(
-                        child: TextFormField(
-                      keyboardType: TextInputType.numberWithOptions(
-                        decimal: true,
-                      ),
-                      decoration: InputDecoration.collapsed(
-                        hintText: 'Deadlift',
-                      ),
-                    )),
+                    Expanded(child: PullUpsField()),
+                    Expanded(child: DeadliftField()),
                   ],
                 ),
               ],
@@ -124,25 +56,8 @@ class AddLogView extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Expanded(
-                      child: TextFormField(
-                        keyboardType: TextInputType.numberWithOptions(
-                          decimal: true,
-                        ),
-                        decoration: InputDecoration.collapsed(
-                          hintText: 'Distance',
-                        ),
-                        textInputAction: TextInputAction.next,
-                      ),
-                    ),
-                    Expanded(
-                      child: TextFormField(
-                        keyboardType: TextInputType.numberWithOptions(
-                          decimal: true,
-                        ),
-                        decoration: InputDecoration.collapsed(hintText: 'Time'),
-                      ),
-                    ),
+                    Expanded(child: DistanceField()),
+                    Expanded(child: TimeRunningField()),
                   ],
                 ),
               ],
@@ -160,6 +75,168 @@ class AddLogView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class DateField extends StatelessWidget {
+  const DateField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return InputDatePickerFormField(
+      firstDate: DateTime.fromMicrosecondsSinceEpoch(0),
+      lastDate: DateTime.now(),
+      initialDate: DateTime.now(),
+      fieldLabelText: 'Date',
+    );
+  }
+}
+
+class StrengthFieldSetHint extends StatelessWidget {
+  const StrengthFieldSetHint({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        text: 'You may specify either maximum the amount of reps you'
+            ' made or the maximum weight you lifted last week, but',
+        style: Theme.of(context).textTheme.bodySmall,
+        children: [
+          TextSpan(
+            text: ' be consistent among all the logs',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          TextSpan(text: ' for each field.'),
+        ],
+      ),
+    );
+  }
+}
+
+class TimeRunningField extends StatelessWidget {
+  const TimeRunningField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      keyboardType: TextInputType.numberWithOptions(
+        decimal: true,
+      ),
+      decoration: InputDecoration.collapsed(hintText: 'Time running'),
+    );
+  }
+}
+
+class DistanceField extends StatelessWidget {
+  const DistanceField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      keyboardType: TextInputType.numberWithOptions(
+        decimal: true,
+      ),
+      decoration: InputDecoration.collapsed(
+        hintText: 'Distance',
+      ),
+      textInputAction: TextInputAction.next,
+    );
+  }
+}
+
+class DeadliftField extends StatelessWidget {
+  const DeadliftField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      keyboardType: TextInputType.numberWithOptions(
+        decimal: true,
+      ),
+      decoration: InputDecoration.collapsed(
+        hintText: 'Deadlift',
+      ),
+    );
+  }
+}
+
+class PullUpsField extends StatelessWidget {
+  const PullUpsField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      keyboardType: TextInputType.numberWithOptions(
+        decimal: true,
+      ),
+      decoration: InputDecoration.collapsed(
+        hintText: 'Pull-ups',
+      ),
+    );
+  }
+}
+
+class BenchPressField extends StatelessWidget {
+  const BenchPressField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      keyboardType: TextInputType.numberWithOptions(
+        decimal: true,
+      ),
+      decoration: InputDecoration.collapsed(
+        hintText: 'Bench press',
+      ),
+    );
+  }
+}
+
+class SquatField extends StatelessWidget {
+  const SquatField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      keyboardType: TextInputType.numberWithOptions(
+        decimal: true,
+      ),
+      decoration: InputDecoration.collapsed(hintText: 'Squat'),
+    );
+  }
+}
+
+class HeightField extends StatelessWidget {
+  const HeightField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      keyboardType: TextInputType.numberWithOptions(
+        decimal: true,
+      ),
+      decoration: InputDecoration.collapsed(
+        hintText: 'Height',
+      ),
+    );
+  }
+}
+
+class WeightField extends StatelessWidget {
+  const WeightField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      keyboardType: TextInputType.numberWithOptions(
+        decimal: true,
+      ),
+      decoration: InputDecoration.collapsed(
+        hintText: 'Weight',
+      ),
+      textInputAction: TextInputAction.next,
     );
   }
 }
