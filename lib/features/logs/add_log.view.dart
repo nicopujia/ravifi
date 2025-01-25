@@ -21,7 +21,8 @@ class AddLogView extends StatelessWidget {
             DateField(),
             SizedBox(height: 16),
             FormFieldSet(
-              label: Text('BMI'),
+              labelText: 'BMI',
+              icon: Icons.boy,
               children: [
                 Row(
                   children: [
@@ -33,7 +34,8 @@ class AddLogView extends StatelessWidget {
             ),
             SizedBox(height: 16),
             FormFieldSet(
-              label: Text('Strength'),
+              labelText: 'Strength',
+              icon: Icons.fitness_center,
               children: [
                 StrengthFieldSetHint(),
                 Row(
@@ -52,7 +54,8 @@ class AddLogView extends StatelessWidget {
             ),
             SizedBox(height: 16),
             FormFieldSet(
-              label: Text('Aerobics'),
+              labelText: 'Aerobics',
+              icon: Icons.run_circle_outlined,
               children: [
                 Row(
                   children: [
@@ -242,15 +245,31 @@ class WeightField extends StatelessWidget {
 }
 
 class FormFieldSet extends StatelessWidget {
-  const FormFieldSet({super.key, this.children = const [], this.label});
+  const FormFieldSet({
+    super.key,
+    required this.labelText,
+    this.icon,
+    this.children = const [],
+  });
 
+  final String labelText;
+  final IconData? icon;
   final List<Widget> children;
-  final Widget? label;
 
   @override
   Widget build(BuildContext context) {
     return InputDecorator(
-      decoration: InputDecoration(border: OutlineInputBorder(), label: label),
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        label: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (icon != null) Icon(icon),
+            SizedBox(width: 4),
+            Text(labelText),
+          ],
+        ),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         spacing: 8,
