@@ -76,7 +76,7 @@ class AddLogView extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Expanded(child: DecimalField(hintText: 'Pull-ups')),
+                    Expanded(child: DecimalField(hintText: 'Pull-up')),
                     Expanded(child: DecimalField(hintText: 'Deadlift')),
                   ],
                 ),

@@ -10,8 +10,8 @@ class Log extends OfflineFirstWithSupabaseModel {
   final DateTime date;
   final double weight;
   final double height;
-  final double squats;
-  final double pullUps;
+  final double squat;
+  final double pullUp;
   final double benchPress;
   final double deadlift;
   final double distance;
@@ -26,8 +26,8 @@ class Log extends OfflineFirstWithSupabaseModel {
     required this.date,
     required this.weight,
     required this.height,
-    required this.squats,
-    required this.pullUps,
+    required this.squat,
+    required this.pullUp,
     required this.benchPress,
     required this.deadlift,
     required this.distance,
