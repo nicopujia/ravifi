@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../brick/repository.dart';
-import 'log.model.dart';
-import 'widgets/loading_dialog.dart';
+import '../../../brick/repository.dart';
+import '../models/log.model.dart';
+import '../widgets/loading_dialog.widget.dart';
 
 class AddLogController extends GetxController {
   Duration? timeRunning;

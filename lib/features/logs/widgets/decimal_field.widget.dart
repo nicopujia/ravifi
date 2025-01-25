@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../add_log.controller.dart';
+import '../controllers/add_log.controller.dart';
 
 class DecimalField extends StatelessWidget {
   const DecimalField({

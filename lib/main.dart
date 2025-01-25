@@ -4,8 +4,8 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'brick/repository.dart';
-import 'features/home/home.view.dart';
-import 'features/settings/settings.view.dart';
+import 'features/home/views/home.view.dart';
+import 'features/settings/views/settings.view.dart';
 
 Future<void> main() async {
   sqfliteFfiInit();

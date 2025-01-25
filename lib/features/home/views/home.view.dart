@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../logs/add_log.view.dart';
+import '../../logs/views/add_log.view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

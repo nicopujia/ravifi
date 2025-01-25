@@ -19,7 +19,7 @@ import 'package:brick_offline_first/brick_offline_first.dart' show RuntimeOfflin
 // ignore: unused_import, unused_shown_name
 import 'package:sqflite_common/sqlite_api.dart' show DatabaseExecutor;
 
-import '../features/logs/log.model.dart';
+import '../features/logs/models/log.model.dart';
 
 part 'adapters/log_adapter.g.dart';
 
