@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ravifi/features/logs/add_log.controller.dart';
 
+import 'add_log.controller.dart';
 import 'widgets/aerobics_fields.dart';
 import 'widgets/bmi_fields.dart';
 import 'widgets/date_field.dart';

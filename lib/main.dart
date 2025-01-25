@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ravifi/brick/repository.dart';
-import 'package:ravifi/features/home/home.view.dart';
-import 'package:ravifi/features/settings/settings.view.dart';
 import 'package:sqflite/sqflite.dart' show databaseFactory;
+
+import 'brick/repository.dart';
+import 'features/home/home.view.dart';
+import 'features/settings/settings.view.dart';
 
 Future<void> main() async {
   await Repository.configure(databaseFactory);
