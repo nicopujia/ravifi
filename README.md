@@ -14,17 +14,17 @@ To summarize, existing solutions offer a poor experience or are too time-consumi
 
 ## The solution
 
->Visual Physique Tracker (or “Rastreador Visual de Físico” in Spanish, RaViFi for short) is an app to log your physical state in a simple yet complete manner.
->
->First, you set your goal. Whether you’re fat, skinny, or simply want to continue shaping your body, you’re covered.
->
->Then, work out and periodically log your aesthetics, strength, and cardiovascular capacity, in very few input boxes. No complicated measurements are needed.
->
->Already been tracking your data in spreadsheets and your phone gallery? Don’t worry, it won’t take you more than 5 minutes to import all of that into Ravifi.
->
->Finally, you can analyze all your tracked data by making before and after comparisons, looking at charts, and getting AI insights, and seamlessly share your amazing progress with the ones you care about the most.
->
->All your data is available on all of your devices. But if you ever decide you don’t want to continue using the app, just export all your data in a zip folder - for free.
+An app to log your physical state in a simple yet complete manner.
+
+First, you set your goal. Whether you’re fat, skinny, or simply want to continue shaping your body, you’re covered.
+
+Then, work out and periodically log your aesthetics, strength, and cardiovascular capacity, in very few input boxes. No complicated measurements are needed.
+
+Already been tracking your data in spreadsheets and your phone gallery? Don’t worry, it won’t take you more than 5 minutes to import all of that into Ravifi.
+
+Finally, you can analyze all your tracked data by making before and after comparisons, looking at charts, and getting AI insights, and seamlessly share your amazing progress with the ones you care about the most.
+
+All your data is available on all of your devices. But if you ever decide you don’t want to continue using the app, just export all your data in a zip folder - for free.
 
 ### Characteristics
 
