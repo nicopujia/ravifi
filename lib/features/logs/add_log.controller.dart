@@ -6,11 +6,9 @@ class AddLogController extends GetxController {
 
   String? validateDecimal(String? value) {
     if (value == null || value.isEmpty) return null;
-
-    if (double.tryParse(value.replaceAll(RegExp(','), '.')) == null) {
-      return 'Invalid decimal number.';
-    }
-
+    final valueNumeric = double.tryParse(value.replaceAll(RegExp(','), '.'));
+    if (valueNumeric == null) return 'Invalid decimal number.';
+    if (valueNumeric <= 0) return 'Must be greater than 0.';
     return null;
   }
 
