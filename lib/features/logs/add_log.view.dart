@@ -53,21 +53,6 @@ class AddLogView extends StatelessWidget {
               labelText: 'Strength',
               icon: Icons.fitness_center,
               children: [
-                RichText(
-                  text: TextSpan(
-                    text:
-                        'You may specify either maximum the amount of reps you'
-                        ' made or the maximum weight you lifted last week, but',
-                    style: Theme.of(context).textTheme.bodySmall,
-                    children: [
-                      TextSpan(
-                        text: ' be consistent among all the logs',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      TextSpan(text: ' for each field.'),
-                    ],
-                  ),
-                ),
                 Row(
                   children: [
                     Expanded(child: DecimalField(hintText: 'Squat')),
