@@ -8,9 +8,6 @@ import 'package:sqflite/sqflite.dart' show databaseFactory;
 Future<void> main() async {
   await Repository.configure(databaseFactory);
   await Repository().initialize();
-  if (!const bool.hasEnvironment('SUPABASE_KEY')) {
-    throw Exception('SUPABASE_KEY not found in environment variables');
-  }
   runApp(const MainApp());
 }
 

@@ -26,12 +26,10 @@ class Repository extends OfflineFirstWithSupabaseRepository {
       databaseFactory: databaseFactory,
     );
 
-    const supabaseUrl = 'https://wtoogpnklxkpqaxjbudb.supabase.co';
-    // ignore: unnecessary_const
-    const supabaseAnonKey = const String.fromEnvironment('SUPABASE_KEY');
     await Supabase.initialize(
-      url: supabaseUrl,
-      anonKey: supabaseAnonKey,
+      url: 'https://wtoogpnklxkpqaxjbudb.supabase.co',
+      anonKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0b29ncG5rbHhrcHFheGpidWRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc2NTI5MTgsImV4cCI6MjA1MzIyODkxOH0.RgkRWyHRXfX8aIz8nI0IDYLjxDu5eNRp_hw9qQl6jJA',
       httpClient: client,
     );
 
