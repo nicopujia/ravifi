@@ -12,7 +12,10 @@ class DecimalField extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<AddLogController>();
     return TextFormField(
-      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      keyboardType: TextInputType.numberWithOptions(
+        decimal: true,
+        signed: true,
+      ),
       decoration: InputDecoration.collapsed(hintText: hintText),
       textInputAction: TextInputAction.next,
       validator: controller.validateDecimal,
