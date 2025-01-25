@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ravifi/features/logs/add_log.view.dart';
 
 class HomeView extends StatelessWidget {
@@ -15,10 +16,7 @@ class HomeView extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => AddLogView()),
-        ),
+        onPressed: () => Get.to(AddLogView()),
         child: Icon(Icons.add),
       ),
     );

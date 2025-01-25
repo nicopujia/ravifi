@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ravifi/brick/repository.dart';
 import 'package:ravifi/features/home/home.view.dart';
 import 'package:ravifi/features/settings/settings.view.dart';
@@ -13,41 +14,39 @@ Future<void> main() async {
   runApp(const MainApp());
 }
 
-class MainApp extends StatefulWidget {
+class MainController extends GetxController {
+  var currentPageIndex = 0.obs;
+
+  void updatePage(int index) => currentPageIndex.value = index;
+}
+
+class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
   @override
-  State<MainApp> createState() => _MainAppState();
-}
-
-class _MainAppState extends State<MainApp> {
-  int _currentPageIndex = 0;
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: [
-          HomeView(),
-          SettingsView(),
-        ][_currentPageIndex],
-        bottomNavigationBar: NavigationBar(
-          destinations: [
-            NavigationDestination(
-              icon: Icon(Icons.home),
-              label: "Home",
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.settings),
-              label: "Settings",
-            ),
-          ],
-          selectedIndex: _currentPageIndex,
-          onDestinationSelected: (int index) {
-            setState(() {
-              _currentPageIndex = index;
-            });
-          },
+    final controller = Get.put(MainController());
+    return GetMaterialApp(
+      home: Obx(
+        () => Scaffold(
+          body: [
+            HomeView(),
+            SettingsView(),
+          ][controller.currentPageIndex.value],
+          bottomNavigationBar: NavigationBar(
+            destinations: [
+              NavigationDestination(
+                icon: Icon(Icons.home),
+                label: "Home",
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.settings),
+                label: "Settings",
+              ),
+            ],
+            selectedIndex: controller.currentPageIndex.value,
+            onDestinationSelected: controller.updatePage,
+          ),
         ),
       ),
     );

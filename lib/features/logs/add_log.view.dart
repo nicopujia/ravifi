@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ravifi/features/logs/add_log.controller.dart';
 
-class AddLogView extends StatefulWidget {
+class AddLogView extends StatelessWidget {
   const AddLogView({super.key});
 
   @override
-  State<AddLogView> createState() => _AddLogViewState();
-}
-
-class _AddLogViewState extends State<AddLogView> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  @override
   Widget build(BuildContext context) {
+    final controller = Get.put(AddLogController());
     return Scaffold(
       appBar: AppBar(
         title: Text('Add log'),
       ),
       body: Form(
-        key: _formKey,
+        key: controller.formKey,
         child: ListView(
           padding: EdgeInsets.all(16),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -153,17 +149,12 @@ class _AddLogViewState extends State<AddLogView> {
             ),
             SizedBox(height: 16),
             OutlinedButton.icon(
-              onPressed: () {},
+              onPressed: controller.addPhoto,
               label: Text('Add photo'),
               icon: Icon(Icons.photo),
             ),
             FilledButton(
-              onPressed: () {
-                final isValid = _formKey.currentState!.validate();
-                if (isValid) {
-                  Navigator.of(context).pop();
-                }
-              },
+              onPressed: controller.save,
               child: const Text('Save'),
             ),
           ],
