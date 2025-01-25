@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'add_log.controller.dart';
-import 'widgets/aerobics_fields.dart';
-import 'widgets/bmi_fields.dart';
-import 'widgets/date_field.dart';
 import 'widgets/field_set.dart';
-import 'widgets/strength_fields.dart';
+import 'widgets/fields.dart';
 
 class AddLogView extends StatelessWidget {
   const AddLogView({super.key});
@@ -24,7 +21,13 @@ class AddLogView extends StatelessWidget {
           padding: EdgeInsets.all(16),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           children: [
-            DateField(),
+            InputDatePickerFormField(
+              firstDate: DateTime.fromMicrosecondsSinceEpoch(0),
+              lastDate: DateTime.now(),
+              initialDate: DateTime.now(),
+              fieldLabelText: 'Date',
+              errorFormatText: 'Invalid date format. It should be mm/dd/yyyy',
+            ),
             SizedBox(height: 16),
             FieldSet(
               labelText: 'BMI',
@@ -32,8 +35,8 @@ class AddLogView extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Expanded(child: WeightField()),
-                    Expanded(child: HeightField()),
+                    Expanded(child: DecimalField(hintText: 'Weight')),
+                    Expanded(child: DecimalField(hintText: 'Height')),
                   ],
                 ),
               ],
@@ -43,17 +46,31 @@ class AddLogView extends StatelessWidget {
               labelText: 'Strength',
               icon: Icons.fitness_center,
               children: [
-                StrengthFieldSetHint(),
+                RichText(
+                  text: TextSpan(
+                    text:
+                        'You may specify either maximum the amount of reps you'
+                        ' made or the maximum weight you lifted last week, but',
+                    style: Theme.of(context).textTheme.bodySmall,
+                    children: [
+                      TextSpan(
+                        text: ' be consistent among all the logs',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(text: ' for each field.'),
+                    ],
+                  ),
+                ),
                 Row(
                   children: [
-                    Expanded(child: SquatField()),
-                    Expanded(child: BenchPressField()),
+                    Expanded(child: DecimalField(hintText: 'Squat')),
+                    Expanded(child: DecimalField(hintText: 'Bench press')),
                   ],
                 ),
                 Row(
                   children: [
-                    Expanded(child: PullUpsField()),
-                    Expanded(child: DeadliftField()),
+                    Expanded(child: DecimalField(hintText: 'Pull-ups')),
+                    Expanded(child: DecimalField(hintText: 'Deadlift')),
                   ],
                 ),
               ],
@@ -65,8 +82,8 @@ class AddLogView extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Expanded(child: DistanceField()),
-                    Expanded(child: TimeRunningField()),
+                    Expanded(child: DecimalField(hintText: 'Distance')),
+                    Expanded(child: DecimalField(hintText: 'Time running')),
                   ],
                 ),
               ],
