@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/add_log.controller.dart';
+import '../controllers/log.controller.dart';
 import '../widgets/decimal_field.widget.dart';
 import '../widgets/field_set.widget.dart';
 
-class AddLogView extends StatelessWidget {
-  const AddLogView({super.key});
+class LogView extends StatelessWidget {
+  const LogView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(AddLogController());
+    final controller = Get.put(LogController());
     return Scaffold(
       appBar: AppBar(
         title: Text('Add log'),

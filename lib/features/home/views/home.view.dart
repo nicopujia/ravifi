@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../logs/views/add_log.view.dart';
+import '../../logs/views/log.view.dart';
 import '../controllers/home.controller.dart';
 import '../widgets/log_tile.widget.dart';
 
@@ -29,7 +29,7 @@ class HomeView extends StatelessWidget {
               ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(() => AddLogView()),
+        onPressed: () => Get.to(() => LogView()),
         child: Icon(Icons.add),
       ),
     );

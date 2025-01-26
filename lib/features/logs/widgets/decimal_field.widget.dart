@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/add_log.controller.dart';
+import '../controllers/log.controller.dart';
 
 class DecimalField extends StatelessWidget {
   const DecimalField({
@@ -15,7 +15,7 @@ class DecimalField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<AddLogController>();
+    final controller = Get.find<LogController>();
     return TextFormField(
       keyboardType: TextInputType.numberWithOptions(
         decimal: true,

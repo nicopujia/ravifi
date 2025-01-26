@@ -7,7 +7,7 @@ import '../../../brick/repository.dart';
 import '../models/log.model.dart';
 import '../widgets/loading_dialog.widget.dart';
 
-class AddLogController extends GetxController {
+class LogController extends GetxController {
   Duration? timeRunning;
   DateTime date = DateTime.now();
   final formKey = GlobalKey<FormState>();
