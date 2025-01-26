@@ -30,6 +30,10 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
+  void deleteLog(Log log) {
+    Repository().delete(log);
+  }
+
   void _updateLogs(List<Log> data) {
     logs.value = data;
     isLoading.value = false;
