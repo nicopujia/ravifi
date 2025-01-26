@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/log.controller.dart';
-import '../widgets/decimal_field.widget.dart';
+import '../widgets/decimal_form_field.widget.dart';
 import '../widgets/field_set.widget.dart';
 
 class LogView extends StatelessWidget {
@@ -43,13 +43,13 @@ class LogView extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: DecimalField(
+                      child: DecimalFormField(
                         hintText: 'Weight',
                         textEditingController: controller.weightController,
                       ),
                     ),
                     Expanded(
-                      child: DecimalField(
+                      child: DecimalFormField(
                         hintText: 'Height',
                         textEditingController: controller.heightController,
                       ),
@@ -66,13 +66,13 @@ class LogView extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: DecimalField(
+                      child: DecimalFormField(
                         hintText: 'Squat',
                         textEditingController: controller.squatController,
                       ),
                     ),
                     Expanded(
-                      child: DecimalField(
+                      child: DecimalFormField(
                         hintText: 'Bench press',
                         textEditingController: controller.benchPressController,
                       ),
@@ -82,13 +82,13 @@ class LogView extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: DecimalField(
+                      child: DecimalFormField(
                         hintText: 'Pull-up',
                         textEditingController: controller.pullUpController,
                       ),
                     ),
                     Expanded(
-                      child: DecimalField(
+                      child: DecimalFormField(
                         hintText: 'Deadlift',
                         textEditingController: controller.deadliftController,
                       ),
@@ -105,7 +105,7 @@ class LogView extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: DecimalField(
+                      child: DecimalFormField(
                         hintText: 'Distance',
                         textEditingController: controller.distanceController,
                       ),

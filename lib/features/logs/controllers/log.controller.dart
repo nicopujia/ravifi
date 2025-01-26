@@ -5,11 +5,9 @@ import 'package:intl/intl.dart';
 
 import '../../../brick/repository.dart';
 import '../models/log.model.dart';
-import '../widgets/loading_dialog.widget.dart';
+import '../widgets/dialogs/saving_dialog.widget.dart';
 
 class LogController extends GetxController {
-  Duration? timeRunning;
-  DateTime date = DateTime.now();
   final formKey = GlobalKey<FormState>();
   final dateController = TextEditingController();
   final weightController = TextEditingController();
@@ -20,6 +18,14 @@ class LogController extends GetxController {
   final deadliftController = TextEditingController();
   final distanceController = TextEditingController();
   final timeRunningController = TextEditingController();
+  Duration? _timeRunning;
+  DateTime _date = DateTime.now();
+
+  @override
+  void onInit() {
+    _updateDateField();
+    super.onInit();
+  }
 
   @override
   void onClose() {
@@ -35,10 +41,16 @@ class LogController extends GetxController {
     super.onClose();
   }
 
-  @override
-  void onInit() {
-    updateDateField();
-    super.onInit();
+  void showDatePickerDialog() async {
+    final pickedDate = await showDatePicker(
+      context: Get.context!,
+      firstDate: DateTime.fromMicrosecondsSinceEpoch(0),
+      lastDate: DateTime.now(),
+      initialDate: _date,
+    );
+    if (pickedDate == null) return;
+    _date = pickedDate;
+    _updateDateField();
   }
 
   String? validateDecimal(String? value) {
@@ -49,29 +61,14 @@ class LogController extends GetxController {
     return null;
   }
 
-  void showDatePickerDialog() async {
-    final pickedDate = await showDatePicker(
-      context: Get.context!,
-      firstDate: DateTime.fromMicrosecondsSinceEpoch(0),
-      lastDate: DateTime.now(),
-      initialDate: date,
-    );
-    if (pickedDate == null) return;
-    date = pickedDate;
-    updateDateField();
-  }
-
-  void updateDateField() =>
-      dateController.text = DateFormat.yMMMMd().format(date);
-
   void showTimeRunningPicker() async {
-    timeRunning = await showDurationPicker(
+    _timeRunning = await showDurationPicker(
       context: Get.context!,
       initialTime: Duration.zero,
     );
-    if (timeRunning != null) {
+    if (_timeRunning != null) {
       timeRunningController.text =
-          '${timeRunning!.inHours} h ${timeRunning!.inMinutes} min';
+          '${_timeRunning!.inHours} h ${_timeRunning!.inMinutes} min';
     }
   }
 
@@ -81,18 +78,10 @@ class LogController extends GetxController {
     final isValid = formKey.currentState!.validate();
     if (!isValid) return;
 
-    Get.dialog(LoadingDialog(), barrierDismissible: false);
-
-    final weight = parseDecimalField(weightController);
-    final height = parseDecimalField(heightController);
-    final squats = parseDecimalField(squatController);
-    final benchPress = parseDecimalField(benchPressController);
-    final pullUps = parseDecimalField(pullUpController);
-    final deadlift = parseDecimalField(deadliftController);
-    final distance = parseDecimalField(distanceController);
+    Get.dialog(SavingDialog(), barrierDismissible: false);
 
     await Repository().upsert<Log>(Log(
-      date: date,
+      date: _date,
       weight: weight,
       height: height,
       squat: squats,
@@ -100,7 +89,7 @@ class LogController extends GetxController {
       benchPress: benchPress,
       deadlift: deadlift,
       distance: distance,
-      timeRunning: timeRunning?.inMinutes,
+      timeRunning: _timeRunning?.inMinutes,
     ));
 
     await Future.delayed(Duration(milliseconds: 250));
@@ -109,7 +98,11 @@ class LogController extends GetxController {
     Get.back();
   }
 
-  double? parseDecimalField(TextEditingController controller) {
+  void _updateDateField() {
+    dateController.text = DateFormat.yMMMMd().format(_date);
+  }
+
+  double? _parseDecimalField(TextEditingController controller) {
     var value = double.tryParse(controller.text.replaceAll(RegExp(','), '.'));
     if (value == null) return null;
     return value + .0;

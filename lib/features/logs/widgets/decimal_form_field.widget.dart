@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 import '../controllers/log.controller.dart';
 
-class DecimalField extends StatelessWidget {
-  const DecimalField({
+class DecimalFormField extends StatelessWidget {
+  const DecimalFormField({
     super.key,
     required this.hintText,
     this.textEditingController,
