@@ -24,7 +24,7 @@ class DecimalFormField extends StatelessWidget {
       decoration: InputDecoration.collapsed(hintText: hintText),
       textInputAction: TextInputAction.next,
       validator: controller.validateDecimal,
-      autofocus: true,
+      autofocus: controller.log == null,
       controller: textEditingController,
     );
   }

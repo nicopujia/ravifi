@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../logs/models/log.model.dart';
+import '../../logs/views/log.view.dart';
 import '../controllers/home.controller.dart';
 
 class LogTile extends StatelessWidget {
@@ -32,6 +33,7 @@ class LogTile extends StatelessWidget {
       ),
       child: ListTile(
         title: Text(DateFormat.yMMMMd().format(log.date)),
+        onTap: () => Get.to(() => LogView(log: log)),
       ),
     );
   }

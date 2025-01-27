@@ -5,9 +5,13 @@ import 'package:intl/intl.dart';
 
 import '../../../brick/repository.dart';
 import '../models/log.model.dart';
+import '../widgets/dialogs/delete_confirmation_dialog.widget.dart';
 import '../widgets/dialogs/saving_dialog.widget.dart';
 
 class LogController extends GetxController {
+  LogController({this.log});
+
+  final Log? log;
   final formKey = GlobalKey<FormState>();
   final dateController = TextEditingController();
   final weightController = TextEditingController();
@@ -18,26 +22,30 @@ class LogController extends GetxController {
   final deadliftController = TextEditingController();
   final distanceController = TextEditingController();
   final timeRunningController = TextEditingController();
+  late final controllersFieldsMap = {
+    weightController: log?.weight,
+    heightController: log?.height,
+    squatController: log?.squat,
+    benchPressController: log?.benchPress,
+    pullUpController: log?.pullUp,
+    deadliftController: log?.deadlift,
+    distanceController: log?.distance,
+    timeRunningController: log?.timeRunning,
+  };
   Duration? _timeRunning;
   DateTime _date = DateTime.now();
 
   @override
   void onInit() {
-    _updateDateField();
+    _setInitialValues();
     super.onInit();
   }
 
   @override
   void onClose() {
-    dateController.dispose();
-    weightController.dispose();
-    heightController.dispose();
-    squatController.dispose();
-    benchPressController.dispose();
-    pullUpController.dispose();
-    deadliftController.dispose();
-    distanceController.dispose();
-    timeRunningController.dispose();
+    for (var controller in controllersFieldsMap.keys) {
+      controller.dispose();
+    }
     super.onClose();
   }
 
@@ -67,8 +75,7 @@ class LogController extends GetxController {
       initialTime: Duration.zero,
     );
     if (_timeRunning != null) {
-      timeRunningController.text =
-          '${_timeRunning!.inHours} h ${_timeRunning!.inMinutes} min';
+      _updateTimeRunningField();
     }
   }
 
@@ -81,25 +88,61 @@ class LogController extends GetxController {
     Get.dialog(SavingDialog(), barrierDismissible: false);
 
     await Repository().upsert<Log>(Log(
+      id: log?.id,
       date: _date,
-      weight: weight,
-      height: height,
-      squat: squats,
-      pullUp: pullUps,
-      benchPress: benchPress,
-      deadlift: deadlift,
-      distance: distance,
+      weight: _parseDecimalField(weightController),
+      height: _parseDecimalField(heightController),
+      squat: _parseDecimalField(squatController),
+      pullUp: _parseDecimalField(pullUpController),
+      benchPress: _parseDecimalField(benchPressController),
+      deadlift: _parseDecimalField(deadliftController),
+      distance: _parseDecimalField(distanceController),
       timeRunning: _timeRunning?.inMinutes,
     ));
 
-    await Future.delayed(Duration(milliseconds: 250));
+    await Future.delayed(Duration(milliseconds: 100));
 
     Get.back();
-    Get.back();
+    if (log == null) {
+      Get.back();
+    }
+  }
+
+  void delete() async {
+    if (log == null) return;
+
+    final deletionWasConfirmed =
+        await Get.dialog<bool>(DeleteConfirmationDialog());
+
+    if (deletionWasConfirmed != null && deletionWasConfirmed) {
+      Repository().delete(log!);
+      Get.back();
+    }
+  }
+
+  void _setInitialValues() {
+    if (log != null) {
+      _date = log!.date;
+      controllersFieldsMap.forEach((controller, field) {
+        if (field != null) {
+          controller.text = field.toString();
+        }
+      });
+      if (log!.timeRunning != null) {
+        _timeRunning = Duration(minutes: log!.timeRunning!);
+        _updateTimeRunningField();
+      }
+    }
+    _updateDateField();
   }
 
   void _updateDateField() {
     dateController.text = DateFormat.yMMMMd().format(_date);
+  }
+
+  void _updateTimeRunningField() {
+    timeRunningController.text =
+        '${_timeRunning!.inHours} h ${_timeRunning!.inMinutes % 60} min';
   }
 
   double? _parseDecimalField(TextEditingController controller) {

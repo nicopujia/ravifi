@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/log.controller.dart';
+import '../models/log.model.dart';
 import '../widgets/decimal_form_field.widget.dart';
 import '../widgets/field_set.widget.dart';
 
 class LogView extends StatelessWidget {
-  const LogView({super.key});
+  const LogView({super.key, this.log});
+
+  final Log? log;
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(LogController());
+    final controller = Get.put(LogController(log: log));
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add log'),
+        title: Text('${log == null ? 'Add' : 'Edit'} log'),
       ),
       body: Form(
         key: controller.formKey,
@@ -130,9 +133,14 @@ class LogView extends StatelessWidget {
               label: Text('Add photo'),
               icon: Icon(Icons.photo),
             ),
+            if (log != null)
+              FilledButton.tonal(
+                onPressed: controller.delete,
+                child: Text('Delete'),
+              ),
             FilledButton(
               onPressed: controller.save,
-              child: const Text('Save'),
+              child: Text('Save'),
             ),
           ],
         ),
