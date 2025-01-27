@@ -5,16 +5,42 @@ import 'package:intl/intl.dart';
 
 import '../../logs/models/log.model.dart';
 import '../../logs/views/log.view.dart';
-import '../controllers/home.controller.dart';
+import '../controllers/log_list.controller.dart';
 
-class LogTile extends StatelessWidget {
-  const LogTile({super.key, required this.log});
+class LogList extends StatelessWidget {
+  const LogList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.put(LogListController());
+    return Obx(
+      () => controller.logs.isEmpty
+          ? Center(
+              child: Text(
+                controller.isLoading.value
+                    ? 'Loading...'
+                    : controller.errorMsg.isEmpty
+                        ? 'No logs.'
+                        : 'Error: ${controller.errorMsg.value}',
+              ),
+            )
+          : ListView.builder(
+              shrinkWrap: true,
+              itemBuilder: (_, i) => _LogTile(log: controller.logs[i]),
+              itemCount: controller.logs.length,
+            ),
+    );
+  }
+}
+
+class _LogTile extends StatelessWidget {
+  const _LogTile({required this.log});
 
   final Log log;
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<HomeController>();
+    final controller = Get.find<LogListController>();
     return Slidable(
       key: ValueKey(log.id),
       endActionPane: ActionPane(

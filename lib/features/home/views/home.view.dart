@@ -3,15 +3,13 @@ import 'package:get/get.dart';
 
 import '../../logs/views/log.view.dart';
 import '../../settings/views/settings.view.dart';
-import '../controllers/home.controller.dart';
-import '../widgets/log_tile.widget.dart';
+import '../widgets/log_list.widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
     return Scaffold(
       appBar: AppBar(
         title: Text('Ravifi'),
@@ -22,22 +20,7 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-      body: Obx(
-        () => controller.logs.isEmpty
-            ? Center(
-                child: Text(
-                  controller.isLoading.value
-                      ? 'Loading...'
-                      : controller.errorMsg.isEmpty
-                          ? 'No logs.'
-                          : 'Error: ${controller.errorMsg.value}',
-                ),
-              )
-            : ListView.builder(
-                itemBuilder: (_, i) => LogTile(log: controller.logs[i]),
-                itemCount: controller.logs.length,
-              ),
-      ),
+      body: LogList(),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.to(() => LogView()),
         child: Icon(Icons.add),

@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import '../../../brick/repository.dart';
 import '../../logs/models/log.model.dart';
 
-class HomeController extends GetxController {
-  late final StreamSubscription<List<Log>> logsStreamSubscription;
+class LogListController extends GetxController {
+  late final StreamSubscription<List<Log>> streamSubscription;
   final logs = <Log>[].obs;
   var isLoading = true.obs;
   var errorMsg = ''.obs;
@@ -26,7 +26,7 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
-    logsStreamSubscription.cancel();
+    streamSubscription.cancel();
     super.onClose();
   }
 
@@ -40,7 +40,7 @@ class HomeController extends GetxController {
   }
 
   void _listenFutureLogUpdates() {
-    logsStreamSubscription = Repository()
+    streamSubscription = Repository()
         .subscribe<Log>()
         .listen(_updateLogs, onError: _showErrorMsg, cancelOnError: true);
   }
