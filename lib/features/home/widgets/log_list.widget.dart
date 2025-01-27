@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../../logs/models/log.model.dart';
 import '../../logs/views/log.view.dart';
 import '../controllers/log_list.controller.dart';
+import 'subheading.widget.dart';
 
 class LogList extends StatelessWidget {
   const LogList({super.key});
@@ -24,11 +25,21 @@ class LogList extends StatelessWidget {
                         : 'Error: ${controller.errorMsg.value}',
               ),
             )
-          : ListView.builder(
-              shrinkWrap: true,
-              itemBuilder: (_, i) => _LogTile(log: controller.logs[i]),
-              itemCount: controller.logs.length,
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Subheading('Logs'),
+                ..._generateLogTiles(controller.logs),
+              ],
             ),
+    );
+  }
+
+  List<Widget> _generateLogTiles(List<Log> logs) {
+    return List.generate(
+      logs.length,
+      (index) => _LogTile(log: logs[index]),
     );
   }
 }
