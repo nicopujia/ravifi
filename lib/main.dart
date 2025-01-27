@@ -36,6 +36,13 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(MainController());
     return GetMaterialApp(
+      themeMode: ThemeMode.system,
+      theme: ThemeData(
+        brightness: Brightness.light,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+      ),
       home: Obx(
         () => Scaffold(
           body: [
