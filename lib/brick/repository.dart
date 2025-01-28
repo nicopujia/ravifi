@@ -2,7 +2,8 @@ import 'package:brick_offline_first_with_supabase/brick_offline_first_with_supab
 import 'package:brick_sqlite/brick_sqlite.dart';
 import 'package:brick_sqlite/memory_cache_provider.dart';
 import 'package:brick_supabase/brick_supabase.dart' hide Supabase;
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite/sqflite.dart'
+    show DatabaseFactory, inMemoryDatabasePath;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'brick.g.dart';
@@ -21,12 +22,14 @@ class Repository extends OfflineFirstWithSupabaseRepository {
 
   factory Repository() => _instance!;
 
-  static Future<void> configure(DatabaseFactory databaseFactory) async {
+  static Future<void> initializeSupabaseAndConfigure(
+    DatabaseFactory databaseFactory,
+  ) async {
     final (client, queue) = OfflineFirstWithSupabaseRepository.clientQueue(
       databaseFactory: databaseFactory,
     );
 
-    await Supabase.initialize(
+    final supabase = await Supabase.initialize(
       url: 'https://wtoogpnklxkpqaxjbudb.supabase.co',
       anonKey:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0b29ncG5rbHhrcHFheGpidWRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc2NTI5MTgsImV4cCI6MjA1MzIyODkxOH0.RgkRWyHRXfX8aIz8nI0IDYLjxDu5eNRp_hw9qQl6jJA',
@@ -34,7 +37,7 @@ class Repository extends OfflineFirstWithSupabaseRepository {
     );
 
     final provider = SupabaseProvider(
-      Supabase.instance.client,
+      supabase.client,
       modelDictionary: supabaseModelDictionary,
     );
 
@@ -42,7 +45,7 @@ class Repository extends OfflineFirstWithSupabaseRepository {
       supabaseProvider: provider,
       sqliteProvider: SqliteProvider(
         inMemoryDatabasePath,
-        databaseFactory: databaseFactoryFfi,
+        databaseFactory: databaseFactory,
         modelDictionary: sqliteModelDictionary,
       ),
       migrations: migrations,
