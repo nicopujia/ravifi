@@ -144,8 +144,8 @@ class LogController extends GetxController {
   }
 
   double? _parseDecimalField(TextEditingController controller) {
-    var value = double.tryParse(controller.text.replaceAll(RegExp(','), '.'));
+    final value = double.tryParse(controller.text.replaceAll(RegExp(','), '.'));
     if (value == null) return null;
-    return value + .0;
+    return (value * 10).roundToDouble() / 10;
   }
 }
