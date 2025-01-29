@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 import '../../logs/views/log.view.dart';
 import '../../settings/views/settings.view.dart';
+import '../controllers/home.controller.dart';
+import '../widgets/charts/weight_chart.widget.dart';
 import '../widgets/log_list.widget.dart';
 
 class HomeView extends StatelessWidget {
@@ -10,6 +12,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeController());
     return Scaffold(
       appBar: AppBar(
         title: Text('Ravifi'),
@@ -20,7 +23,26 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-      body: LogList(),
+      body: Obx(
+        () => controller.logs.isEmpty
+            ? Center(
+                child: Text(
+                  controller.isLoading.value
+                      ? 'Loading...'
+                      : controller.errorMsg.isEmpty
+                          ? 'No logs.'
+                          : 'Error: ${controller.errorMsg.value}',
+                ),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  children: [
+                    WeightChart(),
+                    LogList(),
+                  ],
+                ),
+              ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.to(() => LogView()),
         child: Icon(Icons.add),

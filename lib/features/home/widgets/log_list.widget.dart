@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../logs/models/log.model.dart';
 import '../../logs/views/log.view.dart';
-import '../controllers/log_list.controller.dart';
+import '../controllers/home.controller.dart';
 import 'subheading.widget.dart';
 
 class LogList extends StatelessWidget {
@@ -13,26 +13,16 @@ class LogList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(LogListController());
+    final controller = Get.find<HomeController>();
     return Obx(
-      () => controller.logs.isEmpty
-          ? Center(
-              child: Text(
-                controller.isLoading.value
-                    ? 'Loading...'
-                    : controller.errorMsg.isEmpty
-                        ? 'No logs.'
-                        : 'Error: ${controller.errorMsg.value}',
-              ),
-            )
-          : Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Subheading('Logs'),
-                ..._generateLogTiles(controller.logs),
-              ],
-            ),
+      () => Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Subheading('Logs'),
+          ..._generateLogTiles(controller.logs),
+        ],
+      ),
     );
   }
 
@@ -51,7 +41,7 @@ class _LogTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<LogListController>();
+    final controller = Get.find<HomeController>();
     return Slidable(
       key: ValueKey(log.id),
       endActionPane: ActionPane(
