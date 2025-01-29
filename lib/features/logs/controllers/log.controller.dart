@@ -135,7 +135,7 @@ class LogController extends GetxController {
   }
 
   void _updateDateField() {
-    dateController.text = DateFormat.yMMMMd().format(_date);
+    dateController.text = DateFormat.yMMMMEEEEd().format(_date);
   }
 
   void _updateTimeRunningField() {

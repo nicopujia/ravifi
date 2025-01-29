@@ -59,7 +59,7 @@ class _LogTile extends StatelessWidget {
         ],
       ),
       child: ListTile(
-        title: Text(DateFormat.yMMMMd().format(log.date)),
+        title: Text(DateFormat.yMMMMEEEEd().format(log.date)),
         onTap: () => Get.to(() => LogView(log: log)),
       ),
     );
