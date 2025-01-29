@@ -24,8 +24,6 @@ Future<void> main() async {
   final session = auth.currentSession;
   if (session == null) {
     await auth.signInAnonymously();
-  } else if (session.isExpired) {
-    await auth.refreshSession(session.refreshToken);
   }
   runApp(const MainApp());
 }
