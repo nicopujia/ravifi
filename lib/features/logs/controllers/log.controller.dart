@@ -102,8 +102,7 @@ class LogController extends GetxController {
 
     await Future.delayed(Duration(milliseconds: 100));
 
-    Get.back();
-    Get.back();
+    Get.close(2);
   }
 
   void delete() async {
