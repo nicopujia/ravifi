@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../subheading.widget.dart';
-
 class ChartCard extends StatelessWidget {
   const ChartCard({super.key, required this.labelText, required this.chart});
 
@@ -15,8 +13,11 @@ class ChartCard extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Subheading(labelText),
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              labelText,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),

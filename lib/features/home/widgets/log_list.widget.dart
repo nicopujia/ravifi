@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import '../../logs/models/log.model.dart';
 import '../../logs/views/log.view.dart';
 import '../controllers/home.controller.dart';
-import 'subheading.widget.dart';
 
 class LogList extends StatelessWidget {
   const LogList({super.key});
@@ -18,10 +17,7 @@ class LogList extends StatelessWidget {
       () => Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Subheading('Logs'),
-          ..._generateLogTiles(controller.logs),
-        ],
+        children: _generateLogTiles(controller.logs),
       ),
     );
   }
