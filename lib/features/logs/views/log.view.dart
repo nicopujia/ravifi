@@ -127,21 +127,60 @@ class LogView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 16),
-            OutlinedButton.icon(
-              onPressed: controller.addPhoto,
-              label: Text('Add photo'),
-              icon: Icon(Icons.photo),
-            ),
-            if (log != null)
-              FilledButton.tonal(
-                onPressed: controller.delete,
-                child: Text('Delete'),
+            Obx(
+              () => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: controller.photo.value == null
+                    ? FilledButton.icon(
+                        onPressed: () => Get.bottomSheet(
+                          BottomSheet(
+                            onClosing: () {},
+                            builder: (context) => ListView(
+                              shrinkWrap: true,
+                              children: [
+                                TextButton.icon(
+                                  onPressed: controller.addPhotoWithCamera,
+                                  label: Text('Take with camera'),
+                                  icon: Icon(Icons.add_a_photo),
+                                ),
+                                TextButton.icon(
+                                  onPressed: controller.addPhotoFromGallery,
+                                  label: Text('Choose from gallery'),
+                                  icon: Icon(Icons.library_add),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        label: Text('Add photo'),
+                        icon: Icon(Icons.add_photo_alternate),
+                      )
+                    : Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.memory(controller.photo.value!),
+                          ),
+                          TextButton.icon(
+                            onPressed: controller.removePhoto,
+                            label: Text('Remove photo'),
+                            icon: Icon(Icons.remove),
+                          ),
+                        ],
+                      ),
               ),
-            FilledButton(
+            ),
+            ElevatedButton(
               onPressed: controller.save,
               child: Text('Save'),
             ),
+            if (log != null)
+              OutlinedButton(
+                onPressed: controller.delete,
+                child: Text('Delete'),
+              ),
+            SizedBox(height: 16),
           ],
         ),
       ),

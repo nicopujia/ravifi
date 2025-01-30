@@ -43,6 +43,10 @@
 	</array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allows you to add existing photos from your library to your logs.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allows you to take photos for your logs directly from the app.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 </dict>

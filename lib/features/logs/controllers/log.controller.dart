@@ -1,6 +1,11 @@
+import 'dart:async';
+
 import 'package:duration_picker/duration_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image/image.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../../../brick/repository.dart';
@@ -13,6 +18,7 @@ class LogController extends GetxController {
 
   final Log? log;
   final formKey = GlobalKey<FormState>();
+  final imagePicker = ImagePicker();
   final dateController = TextEditingController();
   final weightController = TextEditingController();
   final heightController = TextEditingController();
@@ -32,20 +38,25 @@ class LogController extends GetxController {
     distanceController: log?.distance,
     timeRunningController: log?.timeRunning,
   };
+  late final StreamSubscription _photoStreamSubscription;
+  Rx<Uint8List?> photo = Rx(null);
+  bool _photoHasBeenUpdated = false;
   Duration? _timeRunning;
   DateTime _date = DateTime.now();
 
   @override
-  void onInit() {
-    _setInitialValues();
+  void onInit() async {
+    _photoStreamSubscription = photo.listen((_) => _photoHasBeenUpdated = true);
+    await _setInitialFormValues();
     super.onInit();
   }
 
   @override
-  void onClose() {
+  void onClose() async {
     for (var controller in controllersFieldsMap.keys) {
       controller.dispose();
     }
+    await _photoStreamSubscription.cancel();
     super.onClose();
   }
 
@@ -79,7 +90,11 @@ class LogController extends GetxController {
     }
   }
 
-  void addPhoto() {}
+  void addPhotoWithCamera() => _addPhoto(ImageSource.camera);
+
+  void addPhotoFromGallery() => _addPhoto(ImageSource.gallery);
+
+  void removePhoto() => photo.value = null;
 
   void save() async {
     final isValid = formKey.currentState!.validate();
@@ -87,7 +102,7 @@ class LogController extends GetxController {
 
     Get.dialog(SavingDialog(), barrierDismissible: false);
 
-    await Repository().upsert<Log>(Log(
+    final upsertedLog = await Repository().upsert<Log>(Log(
       id: log?.id,
       date: _date,
       weight: _parseDecimalField(weightController),
@@ -99,25 +114,29 @@ class LogController extends GetxController {
       distance: _parseDecimalField(distanceController),
       timeRunning: _timeRunning?.inMinutes,
     ));
+    final couldSavePhoto = await _savePhoto(upsertedLog);
 
-    await Future.delayed(Duration(milliseconds: 100));
+    Get.back(); // Saving dialog
 
-    Get.close(2);
+    if (couldSavePhoto == null || couldSavePhoto == true) {
+      Get.back(); // Log view
+    }
   }
 
   void delete() async {
     if (log == null) return;
 
-    final deletionWasConfirmed =
-        await Get.dialog<bool>(DeleteConfirmationDialog());
+    final deletionWasConfirmed = await Get.dialog<bool>(
+      DeleteConfirmationDialog(),
+    );
 
-    if (deletionWasConfirmed != null && deletionWasConfirmed) {
-      Repository().delete(log!);
+    if (deletionWasConfirmed == true) {
+      await Repository().delete(log!);
       Get.back();
     }
   }
 
-  void _setInitialValues() {
+  Future<void> _setInitialFormValues() async {
     if (log != null) {
       _date = log!.date;
       controllersFieldsMap.forEach((controller, field) {
@@ -129,6 +148,7 @@ class LogController extends GetxController {
         _timeRunning = Duration(minutes: log!.timeRunning!);
         _updateTimeRunningField();
       }
+      await _loadPhoto();
     }
     _updateDateField();
   }
@@ -146,5 +166,68 @@ class LogController extends GetxController {
     final value = double.tryParse(controller.text.replaceAll(RegExp(','), '.'));
     if (value == null) return null;
     return (value * 10).roundToDouble() / 10;
+  }
+
+  Future<void> _loadPhoto() async {
+    final file = log!.getPhotoFile();
+    photo.value = await file.exists() ? await file.readAsBytes() : null;
+  }
+
+  Future<void> _addPhoto(ImageSource source) async {
+    try {
+      await _pickPhoto(source);
+    } on PlatformException catch (error) {
+      _showMsg(error.code == 'camera_access_denied'
+          ? 'Allow the camera to take photos from the app.'
+          : error.message ?? error.toString());
+    } catch (error) {
+      _showMsg('Error: $error');
+    } finally {
+      if (Get.isBottomSheetOpen == true) {
+        Get.back();
+      }
+    }
+  }
+
+  Future<void> _pickPhoto(ImageSource source) async {
+    final pickedPhoto = await imagePicker.pickImage(
+      source: source,
+      maxWidth: 1080,
+      maxHeight: 1920,
+    );
+
+    if (pickedPhoto != null) {
+      photo.value = await pickedPhoto.readAsBytes();
+    }
+  }
+
+  Future<bool?> _savePhoto(Log upsertedLog) async {
+    if (!_photoHasBeenUpdated) return null;
+    if (photo.value == null) {
+      await upsertedLog.deletePhoto();
+      return true;
+    }
+    try {
+      await upsertedLog.savePhoto(photo.value!);
+      return true;
+    } on ImageException catch (error) {
+      _showMsg(error.message);
+    }
+    return false;
+  }
+
+  void _showMsg(String errorMsg) {
+    final messenger = ScaffoldMessenger.of(Get.context!);
+    messenger.showSnackBar(
+      SnackBar(
+        action: SnackBarAction(
+          label: 'OK',
+          onPressed: () => messenger.hideCurrentSnackBar(
+            reason: SnackBarClosedReason.action,
+          ),
+        ),
+        content: Text(errorMsg),
+      ),
+    );
   }
 }

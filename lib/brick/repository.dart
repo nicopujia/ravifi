@@ -1,16 +1,22 @@
+import 'dart:io';
+
+import 'package:brick_offline_first/brick_offline_first.dart';
 import 'package:brick_offline_first_with_supabase/brick_offline_first_with_supabase.dart';
 import 'package:brick_sqlite/brick_sqlite.dart';
 import 'package:brick_sqlite/memory_cache_provider.dart';
 import 'package:brick_supabase/brick_supabase.dart' hide Supabase;
+import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart'
     show DatabaseFactory, inMemoryDatabasePath;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../features/logs/models/log.model.dart';
 import 'brick.g.dart';
 import 'db/schema.g.dart';
 
 class Repository extends OfflineFirstWithSupabaseRepository {
-  static late Repository? _instance;
+  static late final Repository? _instance;
+  static late final Directory _cacheDir;
 
   Repository._({
     required super.supabaseProvider,
@@ -21,6 +27,26 @@ class Repository extends OfflineFirstWithSupabaseRepository {
   });
 
   factory Repository() => _instance!;
+
+  static Directory get cacheDir => _cacheDir;
+
+  @override
+  Future<void> initialize() async {
+    _cacheDir = await getApplicationCacheDirectory();
+    return super.initialize();
+  }
+
+  @override
+  Future<bool> delete<TModel extends OfflineFirstWithSupabaseModel>(
+    instance, {
+    OfflineFirstDeletePolicy policy = OfflineFirstDeletePolicy.optimisticLocal,
+    Query? query,
+  }) async {
+    if (instance is Log) {
+      await (instance as Log).deletePhoto();
+    }
+    return super.delete(instance, policy: policy, query: query);
+  }
 
   static Future<void> initializeSupabaseAndConfigure(
     DatabaseFactory databaseFactory,

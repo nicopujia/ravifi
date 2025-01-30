@@ -9,6 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
   brick_core: ^1.4.0
+  brick_offline_first: ^3.4.0
   brick_offline_first_with_supabase: ^1.0.0
   brick_sqlite: ^3.1.0
   brick_supabase: ^1.4.1+1
@@ -16,7 +17,10 @@ dependencies:
   fl_chart: ^0.70.2
   flutter_slidable: ^4.0.0
   get: ^4.6.6
+  image: ^4.5.2
+  image_picker: ^1.1.2
   intl: ^0.20.2
+  path_provider: ^2.1.5
   sqflite: ^2.3.0
   sqflite_common: ^2.5.4+6
   sqflite_common_ffi: ^2.3.4+4
