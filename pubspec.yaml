@@ -36,3 +36,32 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family: ChakraPetch
+      fonts:
+        - asset: fonts/ChakraPetch-Bold.ttf
+          weight: 700
+        - asset: fonts/ChakraPetch-Light.ttf
+          weight: 300
+        - asset: fonts/ChakraPetch-MediumItalic.ttf
+          style: italic
+          weight: 500
+        - asset: fonts/ChakraPetch-SemiBoldItalic.ttf
+          style: italic
+          weight: 600
+        - asset: fonts/ChakraPetch-BoldItalic.ttf
+          style: italic
+          weight: 700
+        - asset: fonts/ChakraPetch-LightItalic.ttf
+          style: italic
+          weight: 300
+        - asset: fonts/ChakraPetch-Regular.ttf
+          weight: 400
+        - asset: fonts/ChakraPetch-Italic.ttf
+          style: italic
+          weight: 400
+        - asset: fonts/ChakraPetch-Medium.ttf
+          weight: 500
+        - asset: fonts/ChakraPetch-SemiBold.ttf
+          weight: 600

@@ -36,8 +36,38 @@ class MainApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
-      theme: ThemeData(brightness: Brightness.light),
-      darkTheme: ThemeData(brightness: Brightness.dark),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: Colors.blueAccent,
+        brightness: Brightness.light,
+        fontFamily: 'ChakraPetch',
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+          centerTitle: false,
+        ),
+        scaffoldBackgroundColor: Colors.white,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          shape: ContinuousRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(48.0)),
+          ),
+        ),
+      ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: Colors.blueAccent,
+        brightness: Brightness.dark,
+        fontFamily: 'ChakraPetch',
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.black,
+          centerTitle: false,
+        ),
+        scaffoldBackgroundColor: Colors.black,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          shape: ContinuousRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(48.0)),
+          ),
+        ),
+      ),
       home: HomeView(),
     );
   }
