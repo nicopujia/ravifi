@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
             : SingleChildScrollView(
                 child: Column(
                   children: [
-                    WeightChart(),
+                    if (controller.weightChartSpots.isNotEmpty) WeightChart(),
                     LogList(),
                   ],
                 ),
