@@ -4,6 +4,18 @@
 
 This is an abandoned project. Read further to discover the original idea, why I abandoned it, and what I learned from it.
 
+## Screenshots
+
+Here's a glance of what has been made so far.
+
+<div style="display: flex; overflow-x: auto; white-space: nowrap; gap: 10px">
+    <img src="screenshots/1.png" alt="Home screen without logs" style="height: 512px; width: auto;">
+    <img src="screenshots/2.png" alt="Add log" style="height: 512px; width: auto;">
+    <img src="screenshots/3.png" alt="Edit log" style="height: 512px; width: auto;">
+    <img src="screenshots/4.png" alt="Home screen with logs" style="height: 512px; width: auto;">
+    <img src="screenshots/5.png" alt="Home screen interactivity" style="height: 512px; width: auto;">
+</div>
+
 ## What I've learned
 
 * MVC architecture.
