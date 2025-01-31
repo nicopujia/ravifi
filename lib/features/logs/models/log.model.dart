@@ -9,9 +9,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../../brick/repository.dart';
 
-@ConnectOfflineFirstWithSupabase(
-  supabaseConfig: SupabaseSerializable(tableName: 'logs'),
-)
+@ConnectOfflineFirstWithSupabase(supabaseConfig: SupabaseSerializable())
 class Log extends OfflineFirstWithSupabaseModel {
   final DateTime date;
   final double? weight;
